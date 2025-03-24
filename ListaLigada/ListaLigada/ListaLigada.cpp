@@ -143,17 +143,70 @@ void inserirElemento()
 	}
 }
 
-void excluirElemento()
-{
-	
-}
-
 void buscarElemento()
 {
-	
+	int valor;
+	cout << "Digite um valor a ser buscado: ";
+	cin >> valor;
+
+	NO* resultado = posicaoElemento(valor);
+
+	if (resultado != NULL)
+	{
+		cout << "Elemento " << valor << " encontrado. \n";
+		return;
+	}
+
+	else
+	{
+		cout << "Elemento " << valor << " nao encontrado. \n";
+		return;
+	}
+
 }
 
 
+void excluirElemento()
+{
+	if (primeiro == NULL)
+	{
+		cout << "Lista vazia! Nao ha elementos para excluir. \n";
+		return;
+	}
+
+	int valor;
+	cout << "Digite o valor a ser excluido: ";
+	cin >> valor;
+
+	NO* aux = posicaoElemento(valor);
+	NO* anterior = NULL;
+
+	while (aux != NULL && aux->valor != valor) // busca elemento
+	{
+		anterior = aux;
+		aux = aux->prox;
+	}
+
+	if (aux == NULL) // nao encontrado
+	{
+		cout << "Elemento " << valor << " nao encontrado. \n";
+		return;
+	}
+
+	if (anterior == NULL)
+	{
+		primeiro = aux->prox; //atualiza o primeiro nó
+	}
+
+	else
+	{
+		anterior->prox = aux->prox; //remove o nó
+	}
+
+	free(aux); //libera memória
+	cout << "Elemento " << valor << " excluido com sucesso. \n";
+	return;
+}
 
 // retorna um ponteiro para o elemento buscado
 // ou NULL se o elemento não estiver na lista
