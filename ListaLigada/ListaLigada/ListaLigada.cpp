@@ -128,20 +128,31 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-	if (primeiro == NULL)
+	NO* aux = primeiro; //verifica se já tem o valor
+	while (aux->prox != NULL) {
+		if (aux->valor == novo->valor) {
+			cout << "Elemento " << novo->valor << " ja existe na lista, digite outo elemento. \n";
+			free(novo); // libera a memória para o novo nó
+			return;
+		}
+		aux = aux->prox;
+	}
+
+	if (primeiro == NULL) //se a lista estivar vazia, insere novo elemento como primeiro
 	{
 		primeiro = novo;
 	}
 	else
 	{
-		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
+		NO* aux = primeiro; // procura o final da lista
+		while (aux->prox != NULL)
+		{
 			aux = aux->prox;
 		}
 		aux->prox = novo;
 	}
 }
+
 
 void buscarElemento()
 {
